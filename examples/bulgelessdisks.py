@@ -3,34 +3,57 @@
 
 # ======================================================================
 
+# Import useful packages
 import pylab as plt
 import numpy
-#import toons
-import os, sys
+import os
+import toons
+import galtoon
  
 # ======================================================================
+# Read in the data
 
-
-os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
-
-# read in data from bulgeless_agn_properties_testtable.cat
+# Read in data from bulgeless_agn_properties_testtable.cat, skip the header row
 bulgelessdisks_array = numpy.loadtxt('bulgeless_agn_properties_testtable.cat', skiprows=1)
 
-# Extract the stellar mass and u-r columns
-mass_stellar = bulgelessdisks_array[:,20]
-mag_u = bulgelessdisks_array[:,5]
-mag_r = bulgelessdisks_array[:,7]
-u_r = mag_u - mag_r
+# Extract useful data from table
+massstellar = bulgelessdisks_array[:,20]
+magu = bulgelessdisks_array[:,5]
+magr = bulgelessdisks_array[:,7]
+redshift = bulgelessdisks_array[:,1]
+agntohostluminosity = bulgelessdisks_array[:,2]
+bulgetototal = bulgelessdisks_array[:,3]
+agnbolometricluminosity = bulgelessdisks_array[:,4]
+
+# ----------------------------------------------------------------------
+# Prepare the data
+
+# calculate u-r magnitude
+urcolour = magu - magr
+
+# Normalise the data
+bulgemass = bulgetototal * massstellar
+areabulgemass = toons.normarea(bulgemass) # AttributeError: 'module' object has no attribute 'normarea'
+
+# ----------------------------------------------------------------------
+# Create the plot
 
 # Plot u-r vs stellar mass
 ax=plt.subplot(111)
-ax.scatter(mass_stellar, u_r, c='b')
+ax.scatter(massstellar, urcolour, c='b')
+
+# Make the plot nice
 ax.set_xlim(9.0,12.3)
 ax.set_ylim(0.8,3.3)
-plt.xlabel(u'Stellar Mass log M\u2609')
-plt.ylabel('u-r colour')
+plt.xlabel(r'Stellar Mass (log M$_{\odot}$)')
+plt.ylabel('u-r colour (mag)')
 plt.title('Late-Type Galaxies')
 plt.grid(True)
-plt.savefig("testbulgelessdisks.png")
+
+# Save the plot and tell user what it's called
+savedfile = "testbulgelessdisks.png"
+plt.savefig(savedfile)
+print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()
-#plt.scatter(x, y, s=bmass, c='b', marker=bulge)
+
+# ----------------------------------------------------------------------
