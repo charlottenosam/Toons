@@ -4,8 +4,6 @@
 
 # ======================================================================
 
-import toons
-
 import numpy as np
 import pylab as plt
 from matplotlib.patches import Ellipse as disk
@@ -37,9 +35,20 @@ class Galtoon(object):
       2013-07-18  Started (C Mason)
     """
 # ----------------------------------------------------------------------
+# ----------------------------------------------------------------------
+
+    def __init__(self):        
+        self.hello = "hello there"
+
+# -----------------------------------------------------------------------
+    def pleasework(self):
+        print "well something works"
+        
+# -----------------------------------------------------------------------
+
 # Normalise data columns to make toons easier to see - 
 # 'area' will be the area of the toon
-    def normarea(mydisk):
+    def normarea(self,mydisk):
         
         unitarea = np.linalg.norm(mydisk)
         area = mydisk/unitarea()   

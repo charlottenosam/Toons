@@ -8,7 +8,6 @@ import pylab as plt
 import numpy
 import os
 import toons
-import galtoon
  
 # ======================================================================
 # Read in the data
@@ -28,12 +27,16 @@ agnbolometricluminosity = bulgelessdisks_array[:,4]
 # ----------------------------------------------------------------------
 # Prepare the data
 
+# Instantiate the Galtoons class
+mytoons = toons.Galtoon()
+print mytoons.hello
+mytoons.pleasework()
 # calculate u-r magnitude
 urcolour = magu - magr
 
 # Normalise the data
 bulgemass = bulgetototal * massstellar
-areabulgemass = toons.normarea(bulgemass) # AttributeError: 'module' object has no attribute 'normarea'
+areabulgemass = mytoons.normarea(bulgemass) # AttributeError: 'module' object has no attribute 'normarea'
 
 # ----------------------------------------------------------------------
 # Create the plot
