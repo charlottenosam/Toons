@@ -51,7 +51,8 @@ class Galtoon(object):
     def normarea(self,mydisk):
         
         unitarea = np.linalg.norm(mydisk)
-        area = mydisk/unitarea()   
+        print unitarea      # 'numpy.float64' object is not callable
+        area = mydisk/unitarea   
         return area
         
 # ----------------------------------------------------------------------

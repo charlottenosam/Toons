@@ -31,19 +31,20 @@ agnbolometricluminosity = bulgelessdisks_array[:,4]
 mytoons = toons.Galtoon()
 print mytoons.hello
 mytoons.pleasework()
+
 # calculate u-r magnitude
 urcolour = magu - magr
 
 # Normalise the data
-bulgemass = bulgetototal * massstellar
-areabulgemass = mytoons.normarea(bulgemass) # AttributeError: 'module' object has no attribute 'normarea'
+bulgemass = numpy.multiply(bulgetototal, massstellar)
+areabulgemass = 100 * mytoons.normarea(bulgemass) # 'numpy.float64' object is not callable
 
 # ----------------------------------------------------------------------
 # Create the plot
 
 # Plot u-r vs stellar mass
 ax=plt.subplot(111)
-ax.scatter(massstellar, urcolour, c='b')
+ax.scatter(massstellar, urcolour, s=areabulgemass, c='g')
 
 # Make the plot nice
 ax.set_xlim(9.0,12.3)
