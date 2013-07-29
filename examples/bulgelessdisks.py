@@ -8,6 +8,8 @@ import pylab as plt
 import numpy
 import os
 import toons
+import math
+from matplotlib.patches import Ellipse
  
 # ======================================================================
 # Read in the data
@@ -16,7 +18,7 @@ import toons
 bulgelessdisks_array = numpy.loadtxt('bulgeless_agn_properties_testtable.cat', skiprows=1)
 
 # Extract useful data from table
-massstellar = bulgelessdisks_array[:,20]
+totalmass = bulgelessdisks_array[:,20]
 magu = bulgelessdisks_array[:,5]
 magr = bulgelessdisks_array[:,7]
 redshift = bulgelessdisks_array[:,1]
@@ -36,15 +38,28 @@ mytoons.pleasework()
 urcolour = magu - magr
 
 # Normalise the data
-bulgemass = numpy.multiply(bulgetototal, massstellar)
-areabulgemass = 100 * mytoons.normarea(bulgemass) # 'numpy.float64' object is not callable
+bulgemass = bulgetototal * totalmass
+areabulgemass = 400 * mytoons.normarea(bulgemass)
 
 # ----------------------------------------------------------------------
 # Create the plot
 
 # Plot u-r vs stellar mass
-ax=plt.subplot(111)
-ax.scatter(massstellar, urcolour, s=areabulgemass, c='g')
+ax = plt.subplot(111)
+
+# Disk Mass
+diskmass = totalmass - bulgemass
+
+mytoons.plot_toons(totalmass, urcolour, diskmass, "orange")
+
+#PI = 3.14162
+#for i in range(len(bulgemass)):
+ #   a = 0.8 * 0.5 * math.sqrt(bulgemass[i] / PI)
+  #  b = 0.8 * 4 * a
+   # ax.add_patch(Ellipse((totalmass[i], urcolour[i]), a, b, facecolor="orange", edgecolor="black", alpha=0.5, angle=-45.0))
+
+# Bulge Mass
+ax.scatter(totalmass, urcolour, s=areabulgemass, c='r', alpha=1)
 
 # Make the plot nice
 ax.set_xlim(9.0,12.3)
@@ -56,8 +71,8 @@ plt.grid(True)
 
 # Save the plot and tell user what it's called
 savedfile = "testbulgelessdisks.png"
-plt.savefig(savedfile)
-print "Plot saved as "+os.getcwd()+"/"+savedfile 
+#plt.savefig(savedfile)
+#print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()
 
 # ----------------------------------------------------------------------
