@@ -1,28 +1,25 @@
-# Header documentation goes here!
-
-# Licence information goes here!
-
 # ======================================================================
 
 import numpy as np
 import pylab as plt
 from matplotlib.patches import Ellipse as disk
-from matplotlib.patches import Circle as bulge
+from matplotlib.patches import Circle as bulge 
  
+# PJM: I think we will want to represent both bulges and disks as ellipses...
+
 # ======================================================================
 
-class Galtoon(object):
+class Galtoons(object):
     """
     NAME
-        Galtoon
+        Galtoons
 
     PURPOSE
-        Creates representative galaxy patches.
+        Represent galaxy data as a set of matplotlib patches. 
 
     COMMENTS
 
     INITIALISATION
-        From scratch?
     
     METHODS AND VARIABLES
         
@@ -30,6 +27,9 @@ class Galtoon(object):
 
     AUTHORS
         Charlotte A. Mason (UCSB)
+
+    LICENSE
+        GPLv2
 
     HISTORY
       2013-07-18  Started (C Mason)
@@ -50,6 +50,7 @@ class Galtoon(object):
 # 'area' will be the area of the toon
     def normarea(self,mydisk):
         
+        print mydisk
         unitarea = np.linalg.norm(mydisk)
         print unitarea      # 'numpy.float64' object is not callable
         area = mydisk/unitarea   
