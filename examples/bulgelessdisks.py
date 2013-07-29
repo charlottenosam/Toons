@@ -84,8 +84,8 @@ plt.grid(True)
 
 # Save the plot and tell user what it's called:
 savedfile = "testbulgelessdisks-disks&bulge.png"
-#plt.savefig(savedfile)
-#print "Plot saved as "+os.getcwd()+"/"+savedfile 
+plt.savefig(savedfile)
+print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()
 
 # ----------------------------------------------------------------------
