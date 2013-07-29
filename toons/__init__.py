@@ -1,1 +1,1 @@
-from galtoon import *
+from galtoons import *

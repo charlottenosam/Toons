@@ -44,7 +44,9 @@ mytoons.pleasework()
 urcolour = magu - magr
 
 # Normalise the data
-bulgemass = numpy.multiply(bulgetototal, massstellar)
+# bulgemass = numpy.multiply(bulgetototal, massstellar)
+# PJM: you can also just do
+bulgemass = bulgetototal * massstellar
 areabulgemass = 100 * mytoons.normarea(bulgemass) # 'numpy.float64' object is not callable
 
 # ----------------------------------------------------------------------
