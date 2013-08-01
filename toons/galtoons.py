@@ -52,8 +52,7 @@ class Galtoons(object):
            
 
 # ----------------------------------------------------------------------
-# CAM: I'm not sure how useful these dictionaries are... Is there a better
-# way to do the plotting so that I don't just repeat myself, some kind of loop?
+# CAM: I'm not sure how useful these dictionaries are...
 
 # Plot ellipse toons
     def plot_toons(self, x, y, diskdata, bulgedata, colour):
@@ -71,6 +70,9 @@ class Galtoons(object):
         # plot on the current axes
         ax = plt.gca()
         
+# CAM is there a better way to do the plotting so that I don't
+# just repeat myself, some kind of loop?   
+     
         # plot disks
         squashdisk = math.sqrt(1 - mydisk['eccentricity']*mydisk['eccentricity'])     
         for i in range(len(mydisk['area'])):

@@ -51,7 +51,6 @@ mytoons = toons.Galtoons()
 # Its a choice whether you do all this parsing of the data outside the galtoons
 # class or inside...
 
-
 # ----------------------------------------------------------------------
 
 # Realize the galtoons!
