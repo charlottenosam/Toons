@@ -35,18 +35,16 @@ bulgemass = bulgetototal * totalmass
 diskmass = totalmass - bulgemass
 
 # ----------------------------------------------------------------------
-# Instantiate the Galtoons class
 
-mytoons = toons.Galtoons()
+# Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
-# Instantiate a Galtoons object:
-# PJM: how about something like the following initialisation instead?
+mybulges = {'x':totalmass, 'y':urcolour, 'q':None, 'phi':None, 'size':bulgemass, 'colour':urcolour, 'brightness':agnbolometricluminosity}
+mydisks = {'x':totalmass, 'y':urcolour, 'q':None, 'phi':None, 'size':diskmass, 'colour':urcolour, 'brightness':agnbolometricluminosity}
 
-#mycoords = {'x':totalmass, 'y':urcolour}
-#mybulges = {'size':bulgesize, 'mass':bulgemass, 'colour':urcolour}
-#mydisks = {'size':disksize, 'mass':diskmass, 'colour':urcolour}
+# Instantiate the Galtoons object
+# !!!! Problem here, how to define blobs.__init__? does it contain x,y,q etc. or not? !!!!
+mytoons = toons.Galtoons(bulges=mybulges,disks=mydisks,halos=None)
 
-# mytoons = toons.Galtoons(bulges=mybulges,disks=None,halos=None)
 # Dictionaries are nice because you can reference them by the name of a parameter.
 # Its a choice whether you do all this parsing of the data outside the galtoons
 # class or inside...
@@ -70,7 +68,8 @@ mytoons = toons.Galtoons()
 ax = plt.subplot(111)
 
 # Plot toons
-mytoons.plot_toons(totalmass, urcolour, diskmass, bulgemass, "cyan")
+mytoons.plot_toons()
+#mytoons.plot_toons(totalmass, urcolour, agnbolometricluminosity, bulgemass, "cyan")
 
 # ----------------------------------------------------------------------
 # Make the plot nice:
@@ -82,7 +81,7 @@ plt.title('Late-Type Galaxies')
 plt.grid(True)
 
 # Save the plot and tell user what it's called:
-savedfile = "testbulgelessdisks-disks&bulge-realisticcolours.png"
+savedfile = "testbulgelessdisks-disks&bulge-blobs.png"
 plt.savefig(savedfile)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()
