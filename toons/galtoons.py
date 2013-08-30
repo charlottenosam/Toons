@@ -38,19 +38,23 @@ class Galtoons(object):
 
     def __init__(self, bulges=None, disks=None, halos=None):        
         self.hello = "galtoons says 'hello there'"
-        self.bulgeblobs = Blobs(bulges)
-        self.diskblobs = Blobs(disks)
-        self.haloblobs = Blobs(halos)
-        self.allblobs = {'bulges':self.bulgeblobs, 'disks':self.diskblobs, 'halos':self.haloblobs}
+#         self.bulgeblobs = Blobs(bulges)
+#         self.diskblobs = Blobs(disks)
+#         self.haloblobs = Blobs(halos)
+#         self.allblobs = {'bulges':self.bulgeblobs, 'disks':self.diskblobs, 'halos':self.haloblobs}
+
+# Phil's more compact version:
+        self.components = {'bulges':Blobs(bulges), 'disks':Blobs(disks), 'halos':Blobs(halos)}
 
 # -----------------------------------------------------------------------
 
-# Plot galtoons made up of up to 3 blobs
+# Plot galtoons made up of up to 3 blobs:
 
     def plot_toons(self):
 
-        for k in self.allblobs:
-            if self.allblobs[k] is not None:
-                self.allblobs[k].plot_blobs()
-
-    
+        # Loop over halos, disks and bulges:
+        for ofTypeX in self.components:
+        
+            if self.components[ofTypeX].exist:
+                                
+                self.components[ofTypeX].plot_blobs()

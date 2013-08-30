@@ -41,11 +41,14 @@ class Blobs(object):
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 
-# Initiate the Blobs class - import the galaxy properties and plot
+# Initiate the Blobs class by importing the toons' components' properties:
 
     def __init__(self, pars):        
         self.hello = "blobs says 'hello there'"
-        self.set_parameters(pars)   
+        self.name = None
+        
+        # Initialise variables:
+        self.exist = False
         self.x = None
         self.y = None 
         self.q = None
@@ -53,6 +56,10 @@ class Blobs(object):
         self.size = None 
         self.colour = None 
         self.brightness = None
+        
+        # Now set according to argument:
+        self.set_parameters(pars)
+        
         return
 
 # -----------------------------------------------------------------------
@@ -85,51 +92,65 @@ class Blobs(object):
 
 # Define the parameters for the blobs      
     def set_parameters(self,pars):
-        # x co-ordinates
+
         if pars is not None:
+            
+            if 'name' in pars:
+                self.name = pars['name']
+            else:
+                self.name = None
+            
+            # x co-ordinates
             if 'x' in pars:
                 self.x = pars['x']
             else:
                 self.x = None
-                print "You must set x co-ordinates"
+                print "Warning: you must set x co-ordinates for a blob to exist..."
         
-        # y co-ordinates    
+            # y co-ordinates    
             if 'y' in pars:
                 self.y = pars['y']
             else:
                 self.y = None
-                print "You must set y co-ordinates"
+                print "Warning: you must set y co-ordinates for a blob to exist..."
 
-        # axis ratio q = b/a
+            # Now we know if these blobs exist:
+            if self.x == None or self.y == None:
+                self.exist = False
+                return
+            else:
+                self.exist = True
+
+            # axis ratio q = b/a
             if 'q' in pars:
                 self.q = pars['q']
             else:
                 self.q = [0.5 for i in range(len(self.x))]
             
-        # axis angle
+            # axis angle
             if 'phi' in pars:
                 self.phi = pars['phi']
             else:
                 self.phi = [-30.0 for i in range(len(self.x))]
         
-        # size of blob (property to represent)                
+            # size of blob (property to represent)                
             if 'size' in pars:
                 self.size = pars['size']
             else:
                 self.size = [4 for i in range(len(self.x))]
         
-        # colour of blob        
+            # colour of blob        
             if 'colour' in pars:
                 self.colour = pars['colour']
             else:
                 self.colour = ["blue" for i in range(len(self.x))]
 
-        # brightness parameter will be alpha of blob
+            # brightness parameter will be alpha of blob
             if 'brightness' in pars:
                 self.brightness = self.percentdata(pars['brightness'])
                 if i in range(len(self.x)) > 10:
                     self.brightness = 10*self.percentdata(pars['brightness']) 
-                print self.brightness
+                # print self.brightness
             else:
                 self.brightness = [0.8 for i in range(len(self.x))]
             return
@@ -141,20 +162,23 @@ class Blobs(object):
 # I get the error "'Blobs' object has no attribute 'x'" #
     
     def get_parameters(self):
-#        self.myblob = vars(self)
-#        print self.myblob
-        self.myblob = {'x':self.x, 'y':self.y, 'q':self.q, 'phi':self.phi, 
+                
+        pars = {'name':self.name, 'x':self.x, 'y':self.y, 'q':self.q, 'phi':self.phi, 
                    'size':self.size, 'colour':self.colour, 'brightness':self.brightness}
-        return self.myblob
+        # print "In get_parameters, pars = ",pars
+        
+        return pars
 
 # -----------------------------------------------------------------------                
 
 # Plot the blobs
                 
     def plot_blobs(self):
-        # get the parameters
+
+        # Get this blob's parameters:
         blob = self.get_parameters()
-        print blob
+        print "Plotting "+blob['name']+" components..."
+        
         # define PI
         PI = 3.14159265359
        

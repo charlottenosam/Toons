@@ -38,8 +38,8 @@ diskmass = totalmass - bulgemass
 
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
-mybulges = {'x':totalmass, 'y':urcolour, 'size':bulgemass, 'brightness':agnbolometricluminosity}
-mydisks = {'x':totalmass, 'y':urcolour, 'size':diskmass, 'brightness':agnbolometricluminosity}
+mybulges = {'name':'bulge', 'x':totalmass, 'y':urcolour, 'size':bulgemass, 'brightness':agnbolometricluminosity}
+mydisks = {'name':'disk', 'x':totalmass, 'y':urcolour, 'size':diskmass, 'brightness':agnbolometricluminosity}
 
 # Instantiate the Galtoons object, mytoons
 mytoons = toons.Galtoons(bulges=mybulges,disks=mydisks,halos=None)
@@ -67,9 +67,9 @@ plt.title('Late-Type Galaxies')
 plt.grid(True)
 
 # Save the plot and tell user what it's called:
-savedfile = "testbulgelessdisks-disks&bulge-blobs.png"
+savedfile = "testbulgelessdisks-disks+bulge-blobs.png"
 plt.savefig(savedfile)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
-plt.show()
+# plt.show()
 
 # ----------------------------------------------------------------------
