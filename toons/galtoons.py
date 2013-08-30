@@ -1,9 +1,6 @@
 # ======================================================================
+# Import useful packages
 
-import pylab as plt
-import numpy as np
-import math
-from matplotlib.patches import Ellipse
 from blobs import *
 
 # ======================================================================
@@ -37,22 +34,23 @@ class Galtoons(object):
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 
-    def __init__(self, disks=None, bulges=None, halos=None):        
+# Initiate the Galtoons class - make bulge, disk and halo Blob objects
+
+    def __init__(self, bulges=None, disks=None, halos=None):        
         self.hello = "galtoons says 'hello there'"
-        haloblobs = None
-#         haloblobs = Blobs(halos)
-        diskblobs = Blobs(disks)
-        bulgeblobs = Blobs(bulges)
-        self.components = {'halos':haloblobs, 'disks':diskblobs, 'bulges':bulgeblobs}
+        self.bulgeblobs = Blobs(bulges)
+        self.diskblobs = Blobs(disks)
+        self.haloblobs = Blobs(halos)
+        self.allblobs = {'bulges':self.bulgeblobs, 'disks':self.diskblobs, 'halos':self.haloblobs}
 
 # -----------------------------------------------------------------------
 
 # Plot galtoons made up of up to 3 blobs
 
-    def plot_toons(self, haloblobs, diskblobs, bulgeblobs):
-        
-        for k in self.components:
-            if self.components[k] is not None:
-                self.components[k].plot_blobs()
+    def plot_toons(self):
+
+        for k in self.allblobs:
+            if self.allblobs[k] is not None:
+                self.allblobs[k].plot_blobs()
 
     

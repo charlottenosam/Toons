@@ -38,29 +38,16 @@ diskmass = totalmass - bulgemass
 
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
-mybulges = {'x':totalmass, 'y':urcolour, 'q':None, 'phi':None, 'size':bulgemass, 'colour':urcolour, 'brightness':agnbolometricluminosity}
-mydisks = {'x':totalmass, 'y':urcolour, 'q':None, 'phi':None, 'size':diskmass, 'colour':urcolour, 'brightness':agnbolometricluminosity}
+mybulges = {'x':totalmass, 'y':urcolour, 'size':bulgemass, 'brightness':agnbolometricluminosity}
+mydisks = {'x':totalmass, 'y':urcolour, 'size':diskmass, 'brightness':agnbolometricluminosity}
 
-# Instantiate the Galtoons object
-# !!!! Problem here, how to define blobs.__init__? does it contain x,y,q etc. or not? !!!!
+# Instantiate the Galtoons object, mytoons
 mytoons = toons.Galtoons(bulges=mybulges,disks=mydisks,halos=None)
 
-# Dictionaries are nice because you can reference them by the name of a parameter.
-# Its a choice whether you do all this parsing of the data outside the galtoons
-# class or inside...
 
 # ----------------------------------------------------------------------
 
 # Realize the galtoons!
-# PJM: perhaps aim for a command like the following?
-#   mytoons.scatterplot(massstellar, urcolour)
-# where the two arguments are the x,y positions of the galtoons?
-# This is not ideal either, because the galtoons should know where they are 
-# in parameter space! You could initialise the galtoons with bulge, disk and 
-# halo properties, in dictionaries, but then internally make composite properties
-# like stellarmass and colour, which you could then call as follows:
-#   mytoons.scatterplot('stellarmass', 'colour')
-
 
 # Create the plot
 
@@ -69,7 +56,6 @@ ax = plt.subplot(111)
 
 # Plot toons
 mytoons.plot_toons()
-#mytoons.plot_toons(totalmass, urcolour, agnbolometricluminosity, bulgemass, "cyan")
 
 # ----------------------------------------------------------------------
 # Make the plot nice:
