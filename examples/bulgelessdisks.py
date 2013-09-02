@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # Example plots using galtoons
 
+# Bulgeless Disk data 
+
 # ======================================================================
 
 # Import useful packages
@@ -70,6 +72,6 @@ plt.grid(True)
 savedfile = "testbulgelessdisks-disks+bulge-blobs.png"
 plt.savefig(savedfile)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
-# plt.show()
+plt.show()
 
 # ----------------------------------------------------------------------

@@ -131,7 +131,7 @@ class Blobs(object):
             if 'phi' in pars:
                 self.phi = pars['phi']
             else:
-                self.phi = [-30.0 for i in range(len(self.x))]
+                self.phi = [30.0 for i in range(len(self.x))]
         
             # size of blob (property to represent)                
             if 'size' in pars:
@@ -143,14 +143,13 @@ class Blobs(object):
             if 'colour' in pars:
                 self.colour = pars['colour']
             else:
-                self.colour = ["blue" for i in range(len(self.x))]
+                self.colour = ["cyan" for i in range(len(self.x))]
 
             # brightness parameter will be alpha of blob
             if 'brightness' in pars:
                 self.brightness = self.percentdata(pars['brightness'])
                 if i in range(len(self.x)) > 10:
                     self.brightness = 10*self.percentdata(pars['brightness']) 
-                # print self.brightness
             else:
                 self.brightness = [0.8 for i in range(len(self.x))]
             return
@@ -158,8 +157,6 @@ class Blobs(object):
 # -----------------------------------------------------------------------
 
 # Create a new dictionary for the blob
-# !!! But it won't recognise self.x from earlier... What's gone wrong? !!! #
-# I get the error "'Blobs' object has no attribute 'x'" #
     
     def get_parameters(self):
                 
@@ -183,7 +180,7 @@ class Blobs(object):
         PI = 3.14159265359
        
         # work out appropriate size for the toons
-        scale = 3 / self.magdata(blob['size'])
+        scale = 0.25 / self.magdata(blob['size'])
            
         # plot on the current axes
         ax = plt.gca()
