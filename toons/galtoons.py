@@ -52,5 +52,5 @@ class Galtoons(object):
         for ofTypeX in self.components:
         
             if self.components[ofTypeX].exist:
-                print self.components[ofTypeX]                
+
                 self.components[ofTypeX].plot_blobs()
