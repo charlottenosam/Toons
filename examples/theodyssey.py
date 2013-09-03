@@ -49,7 +49,7 @@ disk_size = PI * disk_Rd_arcsec * disk_Rd_arcsec
 
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
-mybulges = {'name':'bulge', 'x':-ra, 'y':dec, 'size':bulge_size, 'phi':bulge_phi, 'q':bulge_q}
+mybulges = {'name':'bulge', 'x':-ra, 'y':dec, 'size':bulge_size, 'phi':bulge_phi, 'q':bulge_q, 'colour':["blue" for i in range(len(ra))]}
 mydisks = {'name':'disk', 'x':-ra, 'y':dec, 'size':disk_size, 'phi':disk_phi}
 
 # Instantiate the Galtoons object, mytoons
