@@ -151,7 +151,7 @@ class Blobs(object):
                 if i in range(len(self.x)) > 10:
                     self.brightness = 10*self.percentdata(pars['brightness']) 
             else:
-                self.brightness = [0.8 for i in range(len(self.x))]
+                self.brightness = [0.6 for i in range(len(self.x))]
             return
     
 # -----------------------------------------------------------------------
