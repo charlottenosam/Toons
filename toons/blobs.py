@@ -4,6 +4,8 @@
 import pylab as plt
 import numpy as np
 import math
+import matplotlib.colors as col
+import matplotlib.cm as cm
 from matplotlib.patches import Ellipse
 
 # ======================================================================
@@ -90,6 +92,18 @@ class Blobs(object):
 
 # ----------------------------------------------------------------------
 
+# Creates a colour map of realistic galaxy colours
+    def define_cmap(self):
+        
+        blue = '#134FA5'
+        white = '#FCE0F4'
+        orange = '#D47512'
+        red = '#851B1D'
+        self.galaxy = col.LinearSegmentedColormap.from_list('galaxy_cmap', [blue, white, orange, red])
+        cm.register_cmap(name='galaxy_cmap', cmap=self.galaxy)    
+
+# ----------------------------------------------------------------------
+
 # Define the parameters for the blobs      
     def set_parameters(self,pars):
 
@@ -139,9 +153,10 @@ class Blobs(object):
             else:
                 self.size = [4 for i in range(len(self.x))]
         
-            # colour of blob        
+            # colour of blob, convert to decimal value to map to colour       
             if 'colour' in pars:
-                self.colour = pars['colour']
+                self.colour_dec = self.percentdata(pars['colour'])
+                self.colour = cm.RdYlBu(self.colour_dec)
             else:
                 self.colour = ["cyan" for i in range(len(self.x))]
 
@@ -180,7 +195,7 @@ class Blobs(object):
         PI = 3.14159265359
        
         # work out appropriate size for the toons
-        scale = 0.25 / self.magdata(blob['size'])
+        scale = 0.1 / self.magdata(blob['size'])
            
         # plot on the current axes
         ax = plt.gca()

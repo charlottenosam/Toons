@@ -40,8 +40,8 @@ diskmass = totalmass - bulgemass
 
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
-mybulges = {'name':'bulge', 'x':totalmass, 'y':urcolour, 'size':bulgemass, 'brightness':agnbolometricluminosity}
-mydisks = {'name':'disk', 'x':totalmass, 'y':urcolour, 'size':diskmass, 'brightness':agnbolometricluminosity}
+mybulges = {'name':'bulge', 'x':totalmass, 'y':urcolour, 'size':bulgemass, 'brightness':agnbolometricluminosity, 'colour':urcolour}
+mydisks = {'name':'disk', 'x':totalmass, 'y':urcolour, 'size':diskmass, 'brightness':agnbolometricluminosity, 'colour':urcolour}
 
 # Instantiate the Galtoons object, mytoons
 mytoons = toons.Galtoons(bulges=mybulges,disks=mydisks,halos=None)

@@ -36,11 +36,11 @@ class Galtoons(object):
 
 # Initiate the Galtoons class - make bulge, disk and halo Blob objects
 
-    def __init__(self, bulges=None, disks=None, halos=None):        
+    def __init__(self, halos=None, disks=None, bulges=None):        
         self.hello = "galtoons says 'hello there'"
 
 # Phil's more compact version:
-        self.components = {'bulges':Blobs(bulges), 'disks':Blobs(disks), 'halos':Blobs(halos)}
+        self.components = {'halos':Blobs(halos), 'adisks':Blobs(disks), 'bulges':Blobs(bulges)}
 
 # -----------------------------------------------------------------------
 
