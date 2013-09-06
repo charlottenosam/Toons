@@ -19,16 +19,20 @@ class Blobs(object):
         Creates ellipses with properties that represent galaxy data.
 
     COMMENTS
-        Area of ellipse, A = PI*a*b, where a and b are semi-major and semi-minor axes.
-        Axis ratio, q = b/a.
-        We scale the ellipse area by a factor 3/(norm of data vector).
+        Area of ellipse, A = PI*a*b, where a and b are semi-major and 
+                                     semi-minor axes.
+        Axis ratio, q = b/a
+        We scale the ellipse area by a factor 3/(norm of data vector)
 
     INITIALISATION
-    
+        From scratch.
+   
     METHODS AND VARIABLES
-        Blobs.normdata(vectordata)      Finds the norm of a given column of data
-        Blobs.plot_blobs()              Plots ellipses with properties defined by given galaxy properties
-        
+        Blobs.define_cmap()     Creates a colourmap 'galaxy_cmap' with 
+                                realistic galaxy colours (blue to red).
+        Blobs.plot_blobs()      Plots ellipses with properties defined
+                                by given galaxy properties.
+
     BUGS
 
     AUTHORS
@@ -42,10 +46,10 @@ class Blobs(object):
     """
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
-
 # Initiate the Blobs class by importing the toons' components' properties:
 
-    def __init__(self, pars):        
+    def __init__(self, pars): 
+               
         self.hello = "blobs says 'hello there'"
         self.name = None
         
@@ -65,46 +69,44 @@ class Blobs(object):
         return
 
 # -----------------------------------------------------------------------
+# Rescale data to be between 0 and 1, used for mapping data values to 
+# colour and alpha
+    
+    def scale_zerotoone(self,vectordata):
+               
+        oldmax = np.min(vectordata)
+        oldmin = np.max(vectordata)
+        oldrange = oldmax - oldmin
+        for i in range(len(vectordata)):
+            newvalue = (vectordata - oldmin) / oldrange
+            
+        return newvalue          
 
+# -----------------------------------------------------------------------
 # Normalise data columns to make toons easier to see - 
 # this returns the magnitude of the data vector
+
     def magdata(self,vectordata):
         totalarea = np.sqrt(np.sum(vectordata*vectordata))
         return totalarea          
-
-
-# ----------------------------------------------------------------------
-
-# Normalise data columns to make toons easier to see - 
-# this returns the normalised data (divide by magnitude)
-    def normdata(self,vectordata):
-        normarea = vectordata/self.magdata(vectordata)
-        return normarea          
-
-# ----------------------------------------------------------------------
-
-# Finds data values as a percentage of the total value - used to provide
-# alpha values for brightness etc.
-    def percentdata(self,vectordata):       
-        totaldata = np.sum(vectordata)
-        percentarea = vectordata/totaldata
-        return percentarea          
-
-# ----------------------------------------------------------------------
-
+        
+# -----------------------------------------------------------------------
 # Creates a colour map of realistic galaxy colours
+   
     def define_cmap(self):
         
         blue = '#134FA5'
         white = '#FCE0F4'
         orange = '#D47512'
         red = '#851B1D'
-        self.galaxy = col.LinearSegmentedColormap.from_list('galaxy_cmap', [blue, white, orange, red])
+        self.galaxy = col.LinearSegmentedColormap.from_list('galaxy_cmap', 
+                                                            [blue, white, 
+                                                             orange, red])
         cm.register_cmap(name='galaxy_cmap', cmap=self.galaxy)    
 
-# ----------------------------------------------------------------------
-
+# -----------------------------------------------------------------------
 # Define the parameters for the blobs      
+    
     def set_parameters(self,pars):
 
         if pars is not None:
@@ -135,54 +137,52 @@ class Blobs(object):
             else:
                 self.exist = True
 
-            # axis ratio q = b/a
+            # Axis ratio q = b/a
             if 'q' in pars:
                 self.q = pars['q']
             else:
                 self.q = [0.5 for i in range(len(self.x))]
             
-            # axis angle
+            # Axis angle
             if 'phi' in pars:
                 self.phi = pars['phi']
             else:
                 self.phi = [30.0 for i in range(len(self.x))]
         
-            # size of blob (property to represent)                
+            # Size of blob (property to represent)                
             if 'size' in pars:
                 self.size = pars['size']
             else:
                 self.size = [4 for i in range(len(self.x))]
         
-            # colour of blob, convert to decimal value to map to colour       
+            # Colour of blob, convert to decimal value to map to colour       
             if 'colour' in pars:
-                self.colour_dec = self.percentdata(pars['colour'])
-                self.colour = cm.RdYlBu(self.colour_dec)
+                self.colour_pars = pars['colour']
+                self.colour_decimal = self.scale_zerotoone(pars['colour'])
+                self.colour = cm.RdYlBu(self.colour_decimal)
             else:
                 self.colour = ["cyan" for i in range(len(self.x))]
 
-            # brightness parameter will be alpha of blob
+            # Brightness parameter will be alpha of blob
             if 'brightness' in pars:
-                self.brightness = self.percentdata(pars['brightness'])
-                if i in range(len(self.x)) > 10:
-                    self.brightness = 10*self.percentdata(pars['brightness']) 
+                self.brightness = self.scale_zerotoone(pars['brightness'])
             else:
                 self.brightness = [0.6 for i in range(len(self.x))]
+            
             return
     
 # -----------------------------------------------------------------------
-
 # Create a new dictionary for the blob
     
     def get_parameters(self):
                 
-        pars = {'name':self.name, 'x':self.x, 'y':self.y, 'q':self.q, 'phi':self.phi, 
-                   'size':self.size, 'colour':self.colour, 'brightness':self.brightness}
-        # print "In get_parameters, pars = ",pars
+        pars = {'name':self.name, 'x':self.x, 'y':self.y, 'q':self.q, 
+                'phi':self.phi, 'size':self.size, 'colour':self.colour, 
+                'brightness':self.brightness}
         
         return pars
 
 # -----------------------------------------------------------------------                
-
 # Plot the blobs
                 
     def plot_blobs(self):
@@ -191,19 +191,23 @@ class Blobs(object):
         blob = self.get_parameters()
         print "Plotting "+blob['name']+" components..."
         
-        # define PI
+        # Define PI
         PI = 3.14159265359
        
-        # work out appropriate size for the toons
+        # Work out appropriate size for the toons
         scale = 0.1 / self.magdata(blob['size'])
            
-        # plot on the current axes
+        # Plot on the current axes
         ax = plt.gca()
      
-        # plot disks
+        # Plot blobs on the axes
         for i in range(len(blob['x'])):
             a = math.sqrt(scale * blob['size'][i] / (blob['q'][i] * PI))
             b = blob['q'][i] * a
             ax.add_patch(Ellipse((blob['x'][i], blob['y'][i]), a, b, 
-                                facecolor=blob['colour'][i], edgecolor="black", 
-                                alpha=blob['brightness'][i], angle=blob['phi'][i]))
+                                  facecolor=blob['colour'][i], 
+                                  edgecolor="black", 
+                                  alpha=blob['brightness'][i], 
+                                  angle=blob['phi'][i]))
+                                
+
