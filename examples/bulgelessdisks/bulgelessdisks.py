@@ -83,7 +83,7 @@ plt.title('Late-Type Galaxies')
 plt.grid(True, color='0.75')
 
 # Save the plot and tell user what it's called
-savedfile = "testbulgelessdisks-mycolours.png"
+savedfile = "example-bulgelessdisks.png"
 plt.savefig(savedfile)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()

@@ -100,7 +100,7 @@ plt.title('The Odyssey')
 plt.grid(True, color='0.75')
 
 # Save the plot and tell user what it's called
-savedfile = "test-theodyssey-customcmap.png"
+savedfile = "example-theodyssey.png"
 plt.savefig(savedfile)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()
