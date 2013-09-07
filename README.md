@@ -9,8 +9,9 @@ The user is able to input galaxy catalog data pertaining to halos, disks and bul
 
 ### Examples
 * [Bulgeless disks](http://github.com/cmason90/Toons/tree/master/examples/bulgelessdisks) - Bulgeless AGN hosts
+  (https://raw.github.com/cmason90/Toons/master/examples/bulgelessdisks/example-bulgelessdisks.png)
 * [The Odyssey](http://github.com/cmason90/Toons/tree/master/examples/theodyssey) - galaxies in square field around "The Odyssey", data from the [SAGA survey](http://github.com/saga-survey).
-
+  (https://raw.github.com/cmason90/Toons/master/examples/theodyssey/example-theodyssey.png)
 ### Authors
 * Charlotte Mason (UCSB)
 * Phil Marshall (KIPAC)
