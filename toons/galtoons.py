@@ -22,8 +22,12 @@ class Galtoons(object):
         From scratch.
         
     METHODS AND VARIABLES
-        Galtoons.plot_toons()   Plots a superposition of up to 3 'blobs' which 
-                                represent the galaxys' halos, disks and bulges 
+        Galtoons.datadict       Dictionary containing dictionaries of galaxy 
+                                data (from input file)
+        Galtoons.components     Dictionary containing "blobs" created from data
+                                in Galtoons.datadict
+        Galtoons.plot_toons()   Plots a superposition of up to 3 "blobs" which 
+                                represent the galaxies' halos, disks and bulges 
                                 if relevant data is supplied.           
     
     BUGS

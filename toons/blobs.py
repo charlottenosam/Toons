@@ -19,6 +19,8 @@ class Blobs(object):
         Creates ellipses with properties that represent galaxy data.
 
     COMMENTS
+        Takes data from dictionaries of galaxy properties.
+        
         Area of ellipse, A = PI*a*b, where a and b are semi-major and 
                                      semi-minor axes.
         Axis ratio, q = b/a
@@ -28,10 +30,20 @@ class Blobs(object):
         From scratch.
    
     METHODS AND VARIABLES
-        Blobs.define_cmap()     Creates a colourmap 'galaxy_cmap' with 
-                                realistic galaxy colours (blue to red).
-        Blobs.plot_blobs()      Plots ellipses with properties defined
-                                by given galaxy properties.
+        Blobs.name          Name of component (halo, disk or bulge)
+        Blobs.exist         Does this component exist?
+        Blobs.x             x co-ordinates of blob
+        Blobs.y             y co-ordinates of blob
+        Blobs.q             Ellipse axis ratio of blob 
+        Blobs.phi           Ellipse angle of blob
+        Blobs.size          Blob size parameter, e.g. physical area or mass 
+        Blobs.colour        Blob colour parameter, e.g. magnitude
+        Blobs.brightness    Blob brightness parameter, e.g. flux or
+                            surface brightness
+        Blobs.define_cmap() Creates a colourmap 'galaxy_cmap' with 
+                            realistic galaxy colours (blue to red)
+        Blobs.plot_blobs()  Plots ellipses with properties defined
+                            by given galaxy properties
 
     BUGS
 
@@ -104,7 +116,7 @@ class Blobs(object):
         colour3 = '#FCE0F4'    # white
         colour4 = '#134FA5'    # blue
         
-        # Create the colour maps
+        # Create the colour maps (normal and reversed)
         galaxy_cmap = col.LinearSegmentedColormap.from_list('galaxy_cmap', 
                                                             [colour1, colour2, 
                                                              colour3, colour4])
