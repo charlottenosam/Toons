@@ -61,14 +61,15 @@ disk_size = PI * disk_Re_arcsec * disk_Re_arcsec
 flux = pow(10.0, -2.5 * grmag)
 
 # Mean surface brightness with Re
-meansb = flux / (2.0 * 3.14 * (bulge_Re_arcsec**2))  
+bulge_Re_arcsec[bulge_Re_arcsec==0.0] = 0.001 # replace all 0 values with 0.001
+meansb = flux / (2.0 * PI * (bulge_Re_arcsec**2))  
 
 # ----------------------------------------------------------------------
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
 mybulges = {'name':'bulge', 'x':-ra, 'y':dec, 'size':bulge_size, 
             'phi':bulge_phi, 'q':bulge_q, 'colour':grmag, 
-            'colourname':'g-r magnitude', 'brightness':flux}
+            'colourname':'g-r magnitude', 'brightness':meansb}
             
 mydisks = {'name':'disk', 'x':-ra, 'y':dec, 'size':disk_size, 'phi':bulge_phi, 
            'colour':grmag, 'colourname':'g-r magnitude'} 
@@ -100,7 +101,7 @@ plt.title('The Odyssey')
 plt.grid(True, color='0.75')
 
 # Save the plot and tell user what it's called
-savedfile = "example-theodyssey.png"
+savedfile = "example-theodyssey-meansb.png"
 plt.savefig(savedfile)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()
