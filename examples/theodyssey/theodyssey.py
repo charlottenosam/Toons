@@ -70,9 +70,9 @@ mybulges = {'name':'bulge', 'x':-ra, 'y':dec, 'size':bulge_size,
             'phi':bulge_phi, 'q':bulge_q, 'colour':grmag, 
             'colourname':'g-r magnitude', 'brightness':flux}
             
-mydisks = {'name':'disk', 'x':-ra, 'y':dec, 'size':disk_size, 'phi':disk_phi, 
-           'colour':grmag, 'colourname':'g-r magnitude', 
-           'brightness':flux}
+mydisks = {'name':'disk', 'x':-ra, 'y':dec, 'size':disk_size, 'phi':bulge_phi, 
+           'colour':grmag, 'colourname':'g-r magnitude'} 
+           #'brightness':flux}
 
 # Instantiate the Galtoons object, mytoons
 mytoons = toons.Galtoons(halos=None, disks=mydisks, bulges=mybulges)
@@ -100,7 +100,7 @@ plt.title('The Odyssey')
 plt.grid(True, color='0.75')
 
 # Save the plot and tell user what it's called
-savedfile = "test-theodyssey-alphaflux.png"
+savedfile = "test-theodyssey-customcmap.png"
 plt.savefig(savedfile)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()

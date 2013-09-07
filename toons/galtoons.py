@@ -51,9 +51,10 @@ class Galtoons(object):
         # Set colour bar properties
         self.cbar_properties()
                    
-        # Create a dictionary containing the halo, disk and bulge Blob objects
-        self.components = {'halos':Blobs(halos), 'disks':Blobs(disks), 
-                           'bulges':Blobs(bulges)}
+        # Create a 'sortable' dictionary containing the halo, disk and 
+        # bulge Blob objects
+        self.components = {'a_halos':Blobs(halos), 'b_disks':Blobs(disks), 
+                           'c_bulges':Blobs(bulges)}
 
 # -----------------------------------------------------------------------    
 # Set properties for colour bar
@@ -78,10 +79,14 @@ class Galtoons(object):
     def cbar_make(self):
         
         if self.colour_pars is not None:
-            mappable = plt.cm.ScalarMappable(cmap='RdYlBu_r') 
+            
+            dummy_blobs = Blobs(None)
+            mycmap, mycmap_r = dummy_blobs.define_cmap()
+            mappable = plt.cm.ScalarMappable(cmap=mycmap_r) 
             mappable.set_array(self.colour_pars)
             cbar = plt.colorbar(mappable)
-            print "Plotting colour bar representing"+self.colour_name+"..."
+            
+            print "Plotting colour bar representing "+self.colour_name+"..."
             
             if self.colour_name is not None:
                 cbar.set_label(self.colour_name)
@@ -91,10 +96,9 @@ class Galtoons(object):
 
     def plot_toons(self):
 
-        # Loop over halos, disks and bulges:
-        for ofTypeX in self.components:
-            if self.components[ofTypeX].exist:
-                
+        # Loop over halos, disks and bulges in that order:
+        for ofTypeX in sorted(self.components):
+            if self.components[ofTypeX].exist:   
                 self.components[ofTypeX].plot_blobs()
         
         # Add the colour bar

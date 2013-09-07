@@ -58,7 +58,8 @@ mybulges = {'name':'bulge', 'x':totalmass, 'y':urcolour, 'size':bulgemass,
             'colourname':'u-r magnitude'}
 
 mydisks = {'name':'disk', 'x':totalmass, 'y':urcolour, 'size':diskmass, 
-           'colour':urcolour, 'colourname':'u-r magnitude', 'brightness':luminosity}
+           'colour':urcolour, 'colourname':'u-r magnitude', 
+           'brightness':luminosity}
 
 # Instantiate the Galtoons object, mytoons
 mytoons = toons.Galtoons(bulges=mybulges,disks=mydisks,halos=None)
@@ -82,7 +83,7 @@ plt.title('Late-Type Galaxies')
 plt.grid(True, color='0.75')
 
 # Save the plot and tell user what it's called
-savedfile = "testbulgelessdisks-disks+colours.png"
+savedfile = "testbulgelessdisks-mycolours.png"
 plt.savefig(savedfile)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
 plt.show()

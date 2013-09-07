@@ -77,6 +77,7 @@ class Blobs(object):
         oldmax = np.min(vectordata)
         oldmin = np.max(vectordata)
         oldrange = oldmax - oldmin
+        
         for i in range(len(vectordata)):
             newvalue = (vectordata - oldmin) / oldrange
             
@@ -87,7 +88,9 @@ class Blobs(object):
 # this returns the magnitude of the data vector
 
     def magdata(self,vectordata):
+        
         totalarea = np.sqrt(np.sum(vectordata*vectordata))
+        
         return totalarea          
         
 # -----------------------------------------------------------------------
@@ -95,14 +98,38 @@ class Blobs(object):
    
     def define_cmap(self):
         
-        blue = '#134FA5'
-        white = '#FCE0F4'
-        orange = '#D47512'
-        red = '#851B1D'
-        self.galaxy = col.LinearSegmentedColormap.from_list('galaxy_cmap', 
-                                                            [blue, white, 
-                                                             orange, red])
-        cm.register_cmap(name='galaxy_cmap', cmap=self.galaxy)    
+        # Define the colours
+        colour1 = '#910F23'    # red
+        colour2 = '#D47512'    # orange
+        colour3 = '#FCE0F4'    # white
+        colour4 = '#134FA5'    # blue
+        
+        # Create the colour maps
+        galaxy_cmap = col.LinearSegmentedColormap.from_list('galaxy_cmap', 
+                                                            [colour1, colour2, 
+                                                             colour3, colour4])
+        galaxy_cmap_r = col.LinearSegmentedColormap.from_list('galaxy_cmap_r', 
+                                                            [colour4, colour3, 
+                                                             colour2, colour1])
+        # Register and retrieve the cmaps
+        cm.register_cmap(name='galaxy_cmap', cmap=galaxy_cmap) 
+        self.cmap = plt.get_cmap('galaxy_cmap')
+        
+        cm.register_cmap(name='galaxy_cmap_r', cmap=galaxy_cmap_r) 
+        self.cmap_r = plt.get_cmap('galaxy_cmap_r')
+        
+        return self.cmap, self.cmap_r
+
+# -----------------------------------------------------------------------              
+# Map data to rgba colour
+    
+    def data_to_cmap(self, data):
+        
+        self.define_cmap()
+        self.cmap_value = cm.ScalarMappable(cmap=self.cmap)
+        
+        return  self.cmap_value.to_rgba(data)  
+
 
 # -----------------------------------------------------------------------
 # Define the parameters for the blobs      
@@ -159,7 +186,8 @@ class Blobs(object):
             if 'colour' in pars:
                 self.colour_pars = pars['colour']
                 self.colour_decimal = self.scale_zerotoone(pars['colour'])
-                self.colour = cm.RdYlBu(self.colour_decimal)
+                self.colour = self.data_to_cmap(self.colour_decimal)
+                #self.colour = cm.RdYlBu(self.colour_decimal)
             else:
                 self.colour = ["cyan" for i in range(len(self.x))]
 
@@ -167,8 +195,8 @@ class Blobs(object):
             if 'brightness' in pars:
                 self.brightness = self.scale_zerotoone(pars['brightness'])
             else:
-                self.brightness = [0.6 for i in range(len(self.x))]
-            
+                self.brightness = [0.7 for i in range(len(self.x))]
+
             return
     
 # -----------------------------------------------------------------------
