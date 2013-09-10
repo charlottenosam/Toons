@@ -103,17 +103,17 @@ class Galtoons(object):
         # Loop over halos, disks and bulges in that order, plot by redshift:
         for ofTypeX in self.datadict:
             if self.datadict[ofTypeX] is not None:
-                #print "Plotting "+self.datadict[ofTypeX]+" components..."
+                #print "Plotting "+self.datadict.keys()+" components..."
                 if 'z' in self.datadict[ofTypeX]:
                     for i in range(len(self.datadict[ofTypeX]['z'])):
                         for ofTypeX in sorted(self.components):
                             if self.components[ofTypeX].exist:   
                                 self.components[ofTypeX].plot_blobs()
-                #elif 'x' in self.datadict[ofTypeX]:
-                #    for i in range(len(self.datadict[ofTypeX]['x'])):
-                #        for ofTypeX in sorted(self.components):
-                #            if self.components[ofTypeX].exist:   
-                #                self.components[ofTypeX].plot_blobs()
+                elif 'x' in self.datadict[ofTypeX]:
+                    for i in range(len(self.datadict[ofTypeX]['x'])):
+                        for ofTypeX in sorted(self.components):
+                            if self.components[ofTypeX].exist:   
+                                self.components[ofTypeX].plot_blobs()
         
         # Add the colour bar
         self.cbar_make()

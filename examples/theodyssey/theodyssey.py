@@ -44,8 +44,8 @@ disk_phi = odyssey_array[:,13]
 # Define PI
 PI = 3.14159265359
 
-# Magnitude difference
-grmag = gmag - rmag
+# Colour difference
+grcolour = gmag - rmag
 
 # Axis ratio
 bulge_q = 1.0 - bulge_e
@@ -60,7 +60,7 @@ disk_Re_arcsec = disk_Re_kpc / scale_kpc_arcsec
 disk_size = PI * disk_Re_arcsec * disk_Re_arcsec
 
 # Luminosity in AB maggies
-flux = pow(10.0, -2.5 * grmag)
+flux = pow(10.0, -2.5 * gmag)
 
 # Mean surface brightness with Re
 bulge_Re_arcsec[bulge_Re_arcsec==0.0] = 0.001 # replace all 0 values with 0.001
@@ -70,11 +70,11 @@ meansb = flux / (2.0 * PI * (bulge_Re_arcsec**2))
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
 mybulges = {'name':'bulge', 'x':-ra, 'y':dec, 'z':z, 'size':bulge_size, 
-            'phi':bulge_phi, 'q':bulge_q, 'colour':grmag, 
-            'colourname':'g-r magnitude', 'brightness':meansb}
+            'phi':bulge_phi, 'q':bulge_q, 'colour':grcolour, 
+            'colourname':'g-r colour', 'brightness':meansb}
             
 mydisks = {'name':'disk', 'x':-ra, 'y':dec, 'z':z, 'size':disk_size, 'phi':bulge_phi, 
-           'colour':grmag, 'colourname':'g-r magnitude'} 
+           'colour':grcolour, 'colourname':'g-r colour'} 
            #'brightness':flux}
 
 # Instantiate the Galtoons object, mytoons
