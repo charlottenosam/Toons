@@ -53,11 +53,11 @@ diskmass = totalmass - bulgemass
 # ----------------------------------------------------------------------
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
-mybulges = {'name':'bulge', 'x':totalmass, 'y':urcolour, 'size':bulgemass, 
+mybulges = {'name':'bulge', 'x':totalmass, 'y':urcolour, 'z':redshift, 'size':bulgemass, 
             'brightness':luminosity, 'colour':urcolour, 
             'colourname':'u-r magnitude'}
 
-mydisks = {'name':'disk', 'x':totalmass, 'y':urcolour, 'size':diskmass, 
+mydisks = {'name':'disk', 'x':totalmass, 'y':urcolour, 'z':redshift, 'size':diskmass, 
            'colour':urcolour, 'colourname':'u-r magnitude', 
            'brightness':luminosity}
 

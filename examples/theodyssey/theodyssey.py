@@ -21,6 +21,8 @@ odyssey_array = numpy.loadtxt('The_Odyssey_g-r_GIM2D.txt')
 # RA and DEC co-ordinates in arcsec 
 ra = odyssey_array[:,14]
 dec = odyssey_array[:,15]
+# Redshift
+z = odyssey_array[:,2]
 # Magnitudes
 gmag = odyssey_array[:,5]
 rmag = odyssey_array[:,6]
@@ -67,11 +69,11 @@ meansb = flux / (2.0 * PI * (bulge_Re_arcsec**2))
 # ----------------------------------------------------------------------
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
-mybulges = {'name':'bulge', 'x':-ra, 'y':dec, 'size':bulge_size, 
+mybulges = {'name':'bulge', 'x':-ra, 'y':dec, 'z':z, 'size':bulge_size, 
             'phi':bulge_phi, 'q':bulge_q, 'colour':grmag, 
             'colourname':'g-r magnitude', 'brightness':meansb}
             
-mydisks = {'name':'disk', 'x':-ra, 'y':dec, 'size':disk_size, 'phi':bulge_phi, 
+mydisks = {'name':'disk', 'x':-ra, 'y':dec, 'z':z, 'size':disk_size, 'phi':bulge_phi, 
            'colour':grmag, 'colourname':'g-r magnitude'} 
            #'brightness':flux}
 

@@ -229,7 +229,6 @@ class Blobs(object):
 
         # Get this blob's parameters:
         blob = self.get_parameters()
-        print "Plotting "+blob['name']+" components..."
         
         # Define PI
         PI = 3.14159265359
