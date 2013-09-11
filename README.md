@@ -1,15 +1,15 @@
 Toons
 =====
 
+#### Why plot points, when you can draw cartoons?
+
+
 <table><tr align='center'>
 <td align='center'><img src="https://github.com/cmason90/Toons/raw/master/examples/theodyssey/example-theodyssey.png" 
 alt="Satellite galaxies around a Milky Way analog"></td>
 <td align='center'><img src="https://github.com/cmason90/Toons/raw/master/examples/bulgelessdisks/example-bulgelessdisks.png" 
 alt="Bulgeless disk galaxies from Galaxy Zoo"></td>
 </tr></table>
-
-
-Informative scatter plots: why plot points, when you can draw cartoons?
 
 A "Toon" is a representation of a model object, drawn in context. For example, galaxy catalogs typically contain a number of parameters such as RA, Dec, color, magnitude, size, and so on, and astronomers make lots of scatter plots in two of these model parameter dimensions at a time. Plotting each galaxy as a "GalToon" allows more dimensions of the model parameter space to be explored.
 
