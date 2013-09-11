@@ -2,6 +2,7 @@ Toons
 =====
 
 ![view](https://github.com/cmason90/Toons/raw/master/examples/theodyssey/example-theodyssey.png)
+![view](https://github.com/cmason90/Toons/raw/master/examples/bulgelessdisks/example-bulgelessdisks.png)
 
 Informative scatter plots: why plot points, when you can draw cartoons?
 
