@@ -8,8 +8,8 @@ A "toon" is a representation of a model object, drawn in context. For example, g
 The user is able to input galaxy catalog data pertaining to halos, disks and bulges, and Toons will plot a superposition of "blobs" that represent the component properties.
 
 ### Examples
-* [Bulgeless disks](http://github.com/cmason90/Toons/tree/master/examples/bulgelessdisks) - Bulgeless AGN hosts
-* [The Odyssey](http://github.com/cmason90/Toons/tree/master/examples/theodyssey) - galaxies in square field around "The Odyssey", data from the [SAGA survey](http://github.com/saga-survey).
+* [Bulgeless disks](http://github.com/cmason90/Toons/tree/master/examples/bulgelessdisks) - Bulgeless AGN host galaxies from Galaxy Zoo, color vs stellar mass.
+* [The Odyssey](http://github.com/cmason90/Toons/tree/master/examples/theodyssey) - galaxies in a square field around "The Odyssey" Milky Way analog, from the [SAGA survey](http://github.com/saga-survey).
 
 ### Authors
 * Charlotte Mason (UCSB)

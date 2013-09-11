@@ -42,7 +42,7 @@ class Blobs(object):
                             surface brightness
         Blobs.define_cmap() Creates a colourmap 'galaxy_cmap' with 
                             realistic galaxy colours (blue to red)
-        Blobs.plot_blobs()  Plots ellipses with properties defined
+        Blobs.plot()        Plots ellipses with properties defined
                             by given galaxy properties
 
     BUGS
@@ -56,7 +56,6 @@ class Blobs(object):
     HISTORY
       2013-08-25  Started (C Mason)
     """
-# ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 # Initiate the Blobs class by importing the toons' components' properties:
 
@@ -82,16 +81,20 @@ class Blobs(object):
 
 # -----------------------------------------------------------------------
 # Rescale data to be between 0 and 1, used for mapping data values to 
-# colour and alpha
+# colour and alpha.
     
-    def scale_zerotoone(self,vectordata):
+    def scale_zerotoone(self,vectordata,zero=0.0,one=1.0):
                
         oldmax = np.min(vectordata)
         oldmin = np.max(vectordata)
         oldrange = oldmax - oldmin
         
-        for i in range(len(vectordata)):
-            newvalue = (vectordata - oldmin) / oldrange
+        newmin = zero
+        newmax = one
+        newrange = newmax - newmin
+        
+        # Rescale array:
+        newvalue = ((vectordata-oldmin)/oldrange)*(newrange) + newmin
             
         return newvalue          
 
@@ -101,9 +104,7 @@ class Blobs(object):
 
     def magdata(self,vectordata):
         
-        totalarea = np.sqrt(np.sum(vectordata*vectordata))
-        
-        return totalarea          
+        return np.sqrt(np.sum(vectordata*vectordata))
         
 # -----------------------------------------------------------------------
 # Creates a colour map of realistic galaxy colours
@@ -203,9 +204,10 @@ class Blobs(object):
             else:
                 self.colour = ["cyan" for i in range(len(self.x))]
 
-            # Brightness parameter will be alpha of blob
+            # Brightness parameter will be alpha of blob. 
+            # Rescale to 0.3 to 0.9 instead of zero to one!
             if 'brightness' in pars:
-                self.brightness = self.scale_zerotoone(pars['brightness'])
+                self.brightness = self.scale_zerotoone(pars['brightness'],zero=0.3,one=0.9)
             else:
                 self.brightness = [0.7 for i in range(len(self.x))]
 
@@ -223,24 +225,31 @@ class Blobs(object):
         return pars
 
 # -----------------------------------------------------------------------                
-# Plot the blobs
+# Plot the blobs. Sometimes we just want to plot one member of the 
+# set, specified as an optional argument.
                 
-    def plot_blobs(self):
+    def plot(self,member='All'):
 
-        # Get this blob's parameters:
+        # Get these blobs' parameters:
         blob = self.get_parameters()
-        
+                
         # Define PI
         PI = 3.14159265359
        
         # Work out appropriate size for the toons
         scale = 0.1 / self.magdata(blob['size'])
            
-        # Plot on the current axes
+        # Select the current axes
         ax = plt.gca()
      
-        # Plot blobs on the axes
-        for i in range(len(blob['x'])):
+        # Right, which blob or blobs are we plotting?
+        if member == 'All':
+            index = range(len(blob['x']))
+        else:
+            index = [member]
+     
+        # Plot blobs relative to these axes
+        for i in index:
             a = math.sqrt(scale * blob['size'][i] / (blob['q'][i] * PI))
             b = blob['q'][i] * a
             ax.add_patch(Ellipse((blob['x'][i], blob['y'][i]), a, b, 

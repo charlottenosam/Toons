@@ -41,8 +41,8 @@ agnbollum = bulgelessdisks_array[:,4]
 # Calculate u-r magnitude
 urcolour = magu - magr
 
-# Luminosity in AB maggies
-luminosity = pow(10.0, -2.5 * urcolour)
+# r-band flux in AB maggies
+flux = pow(10.0, -2.5 * magr)
 
 # Bulge mass
 bulgemass = bulgetototal * totalmass
@@ -53,13 +53,13 @@ diskmass = totalmass - bulgemass
 # ----------------------------------------------------------------------
 # Create bulges, disks and halo dictionaries. Initialise them in Galtoons
 
-mybulges = {'name':'bulge', 'x':totalmass, 'y':urcolour, 'z':redshift, 'size':bulgemass, 
-            'brightness':luminosity, 'colour':urcolour, 
-            'colourname':'u-r magnitude'}
+mybulges = {'name':'bulge', 'x':totalmass, 'y':urcolour, 'z':redshift, 
+            'size':bulgemass, 'brightness':flux, 
+            'colour':urcolour, 'colourname':'(u-r) colour'}
 
-mydisks = {'name':'disk', 'x':totalmass, 'y':urcolour, 'z':redshift, 'size':diskmass, 
-           'colour':urcolour, 'colourname':'u-r magnitude', 
-           'brightness':luminosity}
+mydisks = {'name':'disk', 'x':totalmass, 'y':urcolour, 'z':redshift, 
+           'size':diskmass, 'brightness':flux,
+           'colour':urcolour, 'colourname':'(u-r) colour',}
 
 # Instantiate the Galtoons object, mytoons
 mytoons = toons.Galtoons(bulges=mybulges,disks=mydisks,halos=None)
@@ -69,23 +69,23 @@ mytoons = toons.Galtoons(bulges=mybulges,disks=mydisks,halos=None)
 # Realize the galtoons!
 
 # Create the plot
-ax = plt.subplot(111, aspect='equal', axisbg='black')
+ax = plt.subplot(111, aspect=0.707, axisbg='white')
 
 # Plot the galtoons
-mytoons.plot_toons()
+mytoons.plot()
 
 # Make the plot nice:
 ax.set_xlim(9.4,11.0)
 ax.set_ylim(1.0,3.0)
 plt.xlabel(r'Stellar Mass (log M$_{\odot}$)')
-plt.ylabel('u-r colour (mag)')
+plt.ylabel('(u-r) colour (mag)')
 plt.title('Late-Type Galaxies')
-plt.grid(True, color='0.75')
+plt.grid(True, color='0.25')
 
 # Save the plot and tell user what it's called
 savedfile = "example-bulgelessdisks.png"
-plt.savefig(savedfile)
+plt.savefig(savedfile,dpi=300)
 print "Plot saved as "+os.getcwd()+"/"+savedfile 
-plt.show()
+# plt.show()
 
 # ----------------------------------------------------------------------
