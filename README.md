@@ -1,8 +1,13 @@
 Toons
 =====
 
-![view](https://github.com/cmason90/Toons/raw/master/examples/theodyssey/example-theodyssey.png)
-![view](https://github.com/cmason90/Toons/raw/master/examples/bulgelessdisks/example-bulgelessdisks.png)
+<table><tr align='center'>
+<td align='center'><img src="https://github.com/cmason90/Toons/raw/master/examples/theodyssey/example-theodyssey.png" 
+alt="Satellite galaxies around a Milky Way analog"></td>
+<td align='center'><img src="https://github.com/cmason90/Toons/raw/master/examples/bulgelessdisks/example-bulgelessdisks.png" 
+alt="Bulgeless disk galaxies from Galaxy Zoo"></td>
+</tr></table>
+
 
 Informative scatter plots: why plot points, when you can draw cartoons?
 
@@ -19,5 +24,5 @@ The user is able to input galaxy catalog data pertaining to halos, disks and bul
 * Phil Marshall (KIPAC)
 * Brooke Simmons (Oxford)
 
-### License
-GPLv2 - share and share alike!
+### License etc
+GPLv2. Please do fork, improve, and keep in touch! Pull requests welcome.
