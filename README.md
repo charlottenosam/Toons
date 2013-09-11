@@ -16,8 +16,9 @@ A "Toon" is a representation of a model object, drawn in context. For example, g
 You can input galaxy catalog data pertaining to halos, disks and bulges, and the Toons will plot themselves as a superposition of "blobs" that represent the component properties. Blobs can have position, size, ellipse axis ratio, orientation, colour and brightness, with values chosen by you.
 
 ### Examples
+Code and data for the above plots can be found via these links:
 * [Bulgeless disks](http://github.com/cmason90/Toons/tree/master/examples/bulgelessdisks) - Bulgeless AGN host galaxies from Galaxy Zoo, color vs stellar mass.
-* [The Odyssey](http://github.com/cmason90/Toons/tree/master/examples/theodyssey) - galaxies in a square field around "The Odyssey" Milky Way analog galaxy, from the [SAGA survey](http://github.com/saga-survey). See also the example image above.
+* [The Odyssey](http://github.com/cmason90/Toons/tree/master/examples/theodyssey) - galaxies in a square field around "The Odyssey" Milky Way analog galaxy, from the SAGA project.
 
 ### Still To Do
 * Nice halo representations in GalToons
