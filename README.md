@@ -5,9 +5,9 @@ Toons
 
 
 <table><tr align='center'>
-<td align='center'><img src="https://github.com/cmason90/Toons/raw/master/examples/theodyssey/example-theodyssey.png" 
+<td align='center'><img src="https://raw.github.com/cmason90/Toons/master/examples/theodyssey/example-theodyssey.png" 
 alt="Satellite galaxies around a Milky Way analog"></td>
-<td align='center'><img src="https://github.com/cmason90/Toons/raw/master/examples/bulgelessdisks/example-bulgelessdisks.png" 
+<td align='center'><img src="https://raw.github.com/cmason90/Toons/master/examples/bulgelessdisks/example-bulgelessdisks.png" 
 alt="Bulgeless disk galaxies from Galaxy Zoo"></td>
 </tr></table>
 
